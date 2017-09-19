@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="trendsViewModel"
+            type="by.insight.test_task_qulix_system.viewmodel.TrendsViewModel"/>
+    </data>
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackground"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_trends"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{trendsViewModel.gifTrendsRecycler}"
+                android:layoutAnimation="@anim/layout_animation_slide_to_right"
+                tools:listitem ="@layout/item_gif"
+                />
+
+            <ProgressBar
+                android:id="@+id/pb_trends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:visibility="@{trendsViewModel.gifProgress}"
+
+                />
+
+        </RelativeLayout>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+</layout>
