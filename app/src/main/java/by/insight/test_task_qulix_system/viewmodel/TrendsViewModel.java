@@ -4,9 +4,12 @@ import android.content.Context;
 import android.databinding.ObservableInt;
 import android.util.Log;
 import android.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.inject.Inject;
+
 import by.insight.test_task_qulix_system.App;
 import by.insight.test_task_qulix_system.Constants;
 import by.insight.test_task_qulix_system.data.GifImageAPI;
@@ -21,7 +24,6 @@ public class TrendsViewModel extends BaseViewModel {
 
     public ObservableInt gifProgress;
     public ObservableInt gifTrendsRecycler;
-
 
     @Inject
     Retrofit mRetrofit;
@@ -62,7 +64,7 @@ public class TrendsViewModel extends BaseViewModel {
         return gifList;
     }
 
-    public void initializeViews() {
+    private void initializeViews() {
         gifTrendsRecycler.set(View.GONE);
         gifProgress.set(View.VISIBLE);
     }

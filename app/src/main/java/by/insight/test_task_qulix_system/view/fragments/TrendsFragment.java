@@ -11,12 +11,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import java.util.Observable;
 import java.util.Observer;
+
 import by.insight.test_task_qulix_system.R;
 import by.insight.test_task_qulix_system.databinding.TabTrendBinding;
 import by.insight.test_task_qulix_system.tools.CustomItemDecoration;
-import by.insight.test_task_qulix_system.tools.EndlessRecyclerViewScrollListener;
 import by.insight.test_task_qulix_system.view.adapter.GifAdapter;
 import by.insight.test_task_qulix_system.viewmodel.TrendsViewModel;
 
@@ -26,8 +27,7 @@ public class TrendsFragment extends Fragment implements Observer{
 
     private LinearLayoutManager mLayoutManager;
     private GifAdapter mGifAdapter;
-
-    private TabTrendBinding binding;
+    private TabTrendBinding mBinding;
     private TrendsViewModel mTrendsViewModel;
 
 
@@ -41,8 +41,8 @@ public class TrendsFragment extends Fragment implements Observer{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.tab_trend, container, false);
-        View view = binding.getRoot();
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.tab_trend, container, false);
+        View view = mBinding.getRoot();
         return view;
 
     }
@@ -51,7 +51,7 @@ public class TrendsFragment extends Fragment implements Observer{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.swipeRefreshLayout.setOnRefreshListener(mRefreshListener);
+        mBinding.swipeRefreshLayout.setOnRefreshListener(mRefreshListener);
         initDataBinding();
         intiRecyclerView();
         setupObserver(mTrendsViewModel);
@@ -60,14 +60,14 @@ public class TrendsFragment extends Fragment implements Observer{
 
     private void initDataBinding() {
         mTrendsViewModel = new TrendsViewModel(getContext());
-        binding.setTrendsViewModel(mTrendsViewModel);
+        mBinding.setTrendsViewModel(mTrendsViewModel);
     }
 
 
     @Override
     public void update(Observable observable, Object o) {
         if (observable instanceof TrendsViewModel) {
-            GifAdapter gifAdapter = (GifAdapter) binding.rvTrends.getAdapter();
+            GifAdapter gifAdapter = (GifAdapter) mBinding.rvTrends.getAdapter();
             TrendsViewModel model = (TrendsViewModel) observable;
             gifAdapter.setGifList(model.getGifList());
         }
@@ -76,20 +76,13 @@ public class TrendsFragment extends Fragment implements Observer{
 
     private void intiRecyclerView() {
         mLayoutManager = new LinearLayoutManager(getContext());
-        binding.rvTrends.setLayoutManager(mLayoutManager);
+        mBinding.rvTrends.setLayoutManager(mLayoutManager);
         mGifAdapter = new GifAdapter();
-        binding.rvTrends.setItemAnimator(new DefaultItemAnimator());
-        binding.rvTrends.addItemDecoration(new CustomItemDecoration(getContext(), Color.BLACK, 2));
-        binding.rvTrends.setHasFixedSize(true);
-        binding.rvTrends.setAdapter(mGifAdapter);
+        mBinding.rvTrends.setItemAnimator(new DefaultItemAnimator());
+        mBinding.rvTrends.addItemDecoration(new CustomItemDecoration(getContext(), Color.BLACK, 2));
+        mBinding.rvTrends.setHasFixedSize(true);
+        mBinding.rvTrends.setAdapter(mGifAdapter);
 
-        binding.rvTrends.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount) {
-
-                mTrendsViewModel.loadTrendsGifList();
-            }
-        });
     }
 
     public void setupObserver(Observable observable) {
@@ -106,7 +99,7 @@ public class TrendsFragment extends Fragment implements Observer{
     private void refresh() {
         mGifAdapter.clear();
         mTrendsViewModel.loadTrendsGifList();
-        binding.swipeRefreshLayout.setRefreshing(false);
+        mBinding.swipeRefreshLayout.setRefreshing(false);
     }
 
     private SwipeRefreshLayout.OnRefreshListener mRefreshListener = () -> refresh();

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#bfd8d8</color>
-    <color name="colorPrimaryDark">#529fa1</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#757575</color>
+    <color name="colorPrimaryDark">#424242</color>
+    <color name="colorAccent">#FBC02D</color>
     <color name="overlineColor">#4D000000</color>
-    <color name="TabTextColor">#FC000000</color>
+    <color name="tab_text_color">#FC000000</color>
+    <color name="background">#bdbdbd</color>
+    <color name="hintab">#e0e0e0</color>
 
 
 </resources>

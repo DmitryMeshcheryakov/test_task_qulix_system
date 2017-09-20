@@ -1,7 +1,6 @@
 package by.insight.test_task_qulix_system.di.component;
 
 
-
 import javax.inject.Singleton;
 
 import by.insight.test_task_qulix_system.di.module.AppModule;

@@ -5,10 +5,13 @@ import android.databinding.ObservableInt;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
+
 import by.insight.test_task_qulix_system.App;
 import by.insight.test_task_qulix_system.Constants;
 import by.insight.test_task_qulix_system.data.GifImageAPI;
@@ -40,12 +43,13 @@ public class SearchViewModel extends BaseViewModel {
 
 
     public void searchGifList(SearchView searchView) {
+
         getCompositeDisposable().add(RxSearch.fromSearchView(searchView)
                 .debounce(300, TimeUnit.MILLISECONDS)
                 .filter(item -> item.length() > 1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(query -> {
-                    initializeViews();
+                    gifProgress.set(View.VISIBLE);
                     loadSearchGifs(mRetrofit.create(GifImageAPI.class).getSearchGifs(query, Constants.TOKEN));
                     gifProgress.set(View.GONE);
                     gifRecycler.set(View.VISIBLE);
@@ -71,8 +75,4 @@ public class SearchViewModel extends BaseViewModel {
         return gifList;
     }
 
-    private void initializeViews() {
-        gifRecycler.set(View.GONE);
-        gifProgress.set(View.VISIBLE);
-    }
 }

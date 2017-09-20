@@ -12,8 +12,6 @@ public class RxSearch {
 
         final BehaviorSubject<String> subject = BehaviorSubject.create();
 
-
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
@@ -33,4 +31,6 @@ public class RxSearch {
 
         return subject;
     }
+
+
 }

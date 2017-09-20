@@ -5,10 +5,13 @@ import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.BindingAdapter;
 import android.widget.ImageView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+
 import by.insight.test_task_qulix_system.model.Data;
+
 public class ItemGifViewModel extends BaseObservable {
 
     private Data mData;

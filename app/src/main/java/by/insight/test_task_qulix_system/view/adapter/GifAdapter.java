@@ -4,8 +4,10 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import java.util.Collections;
 import java.util.List;
+
 import by.insight.test_task_qulix_system.R;
 import by.insight.test_task_qulix_system.databinding.ItemGifBinding;
 import by.insight.test_task_qulix_system.model.Data;
@@ -14,7 +16,6 @@ import by.insight.test_task_qulix_system.model.Data;
 public class GifAdapter extends RecyclerView.Adapter<GifItemViewHolder> {
 
     private List<Data> mDataList;
-
 
     public GifAdapter() {
         this.mDataList = Collections.emptyList();
@@ -26,7 +27,6 @@ public class GifAdapter extends RecyclerView.Adapter<GifItemViewHolder> {
                 parent, false);
         return new GifItemViewHolder(binding);
     }
-
 
     @Override
     public void onBindViewHolder(GifItemViewHolder holder, int position) {
@@ -51,24 +51,4 @@ public class GifAdapter extends RecyclerView.Adapter<GifItemViewHolder> {
         notifyDataSetChanged();
     }
 
-//    public static class ViewHolder extends RecyclerView.ViewHolder {
-//
-//        ItemGifBinding mItemGifBinding;
-//
-//        public ViewHolder(ItemGifBinding itemGifBinding) {
-//            super(itemGifBinding.itemGif);
-//
-//            this.mItemGifBinding = itemGifBinding;
-//        }
-//
-//        void bindGif(Data data) {
-//            if (mItemGifBinding.getGifViewModel() == null) {
-//                mItemGifBinding.setGifViewModel(
-//                        new ItemGifViewModel(data, itemView.getContext()));
-//            } else {
-//                mItemGifBinding.getGifViewModel().setGif(data);
-//            }
-//
-//        }
-//    }
 }

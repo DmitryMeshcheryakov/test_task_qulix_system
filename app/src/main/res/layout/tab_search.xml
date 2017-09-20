@@ -9,29 +9,20 @@
             type="by.insight.test_task_qulix_system.viewmodel.SearchViewModel"/>
     </data>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.SearchView
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@color/colorPrimary"
-            android:elevation="5dp"
-            android:queryHint="Search..."
-            />
+        android:background="@color/background">
 
         <android.support.v7.widget.RecyclerView
+
             android:id="@+id/rv_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/search_view"
             android:layoutAnimation="@anim/layout_animation_slide_to_right"
-           android:visibility="@{searchViewModel.gifRecycler}"
-            tools:listitem ="@layout/item_gif"
+            android:visibility="@{searchViewModel.gifRecycler}"
+            tools:listitem="@layout/item_gif"
 
             />
 
@@ -45,4 +36,6 @@
             />
 
     </RelativeLayout>
+
+
 </layout>
