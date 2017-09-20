@@ -50,6 +50,7 @@ public class SearchViewModel extends BaseViewModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(query -> {
                     gifProgress.set(View.VISIBLE);
+                    gifRecycler.set(View.GONE);
                     loadSearchGifs(mRetrofit.create(GifImageAPI.class).getSearchGifs(query, Constants.TOKEN));
                     gifProgress.set(View.GONE);
                     gifRecycler.set(View.VISIBLE);

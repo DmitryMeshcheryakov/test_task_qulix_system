@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">Test Task Qulix System</string>
     <string name="permissions_internet"></string>
 </resources>
