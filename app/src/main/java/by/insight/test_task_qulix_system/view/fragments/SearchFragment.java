@@ -34,7 +34,6 @@ public class SearchFragment extends Fragment implements Observer {
 
     private LinearLayoutManager mLayoutManager;
     private GifAdapter mGifAdapter;
-
     private TabSearchBinding mBinding;
 
     @Inject

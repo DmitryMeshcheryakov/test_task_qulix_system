@@ -31,6 +31,7 @@ public class TrendsFragment extends Fragment implements Observer {
 
     private LinearLayoutManager mLayoutManager;
     private GifAdapter mGifAdapter;
+
     @Inject
     TrendsViewModel mTrendsViewModel;
 
