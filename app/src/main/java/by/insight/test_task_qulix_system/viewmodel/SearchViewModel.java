@@ -52,8 +52,6 @@ public class SearchViewModel extends BaseViewModel {
                     gifProgress.set(View.VISIBLE);
                     gifRecycler.set(View.GONE);
                     loadSearchGifs(mRetrofit.create(GifImageAPI.class).getSearchGifs(query, Constants.TOKEN));
-                    gifProgress.set(View.GONE);
-                    gifRecycler.set(View.VISIBLE);
                 }, this::handleError));
     }
 
@@ -61,10 +59,12 @@ public class SearchViewModel extends BaseViewModel {
         gif.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(gifObject -> {
-                        gifList.clear();
-                        gifList.addAll(gifObject.getData());
-                        setChanged();
-                        notifyObservers();
+                    gifList.clear();
+                    gifList.addAll(gifObject.getData());
+                    setChanged();
+                    notifyObservers();
+                    gifProgress.set(View.GONE);
+                    gifRecycler.set(View.VISIBLE);
                 });
     }
 

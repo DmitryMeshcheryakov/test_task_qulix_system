@@ -24,7 +24,7 @@ public class ItemGifViewModel extends BaseObservable {
 
     public String getPicture()
     {
-        return mData.getImages().getFixedWidthSmall().getUrl();
+        return mData.getImages().getFixedWidth().getUrl();
     }
 
     @BindingAdapter("imageUrl")
