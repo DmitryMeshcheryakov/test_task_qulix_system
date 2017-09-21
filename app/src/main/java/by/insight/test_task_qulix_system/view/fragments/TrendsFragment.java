@@ -28,7 +28,6 @@ import by.insight.test_task_qulix_system.viewmodel.TrendsViewModel;
 public class TrendsFragment extends Fragment implements Observer {
 
     private TabTrendBinding mBinding;
-
     private LinearLayoutManager mLayoutManager;
     private GifAdapter mGifAdapter;
 
