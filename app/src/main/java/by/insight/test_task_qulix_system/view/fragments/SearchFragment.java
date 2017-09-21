@@ -20,6 +20,9 @@ import android.view.ViewGroup;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.inject.Inject;
+
+import by.insight.test_task_qulix_system.App;
 import by.insight.test_task_qulix_system.R;
 import by.insight.test_task_qulix_system.databinding.TabSearchBinding;
 import by.insight.test_task_qulix_system.tools.CustomItemDecoration;
@@ -31,13 +34,17 @@ public class SearchFragment extends Fragment implements Observer {
 
     private LinearLayoutManager mLayoutManager;
     private GifAdapter mGifAdapter;
+
     private TabSearchBinding mBinding;
-    private SearchViewModel mSearchViewModel;
+
+    @Inject
+    SearchViewModel mSearchViewModel;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((App) getActivity().getApplicationContext()).getViewModelComponent().inject(this);
     }
 
     @Nullable
@@ -59,15 +66,14 @@ public class SearchFragment extends Fragment implements Observer {
     }
 
     private void initDataBinding() {
-        mSearchViewModel = new SearchViewModel(getContext());
         mBinding.setSearchViewModel(mSearchViewModel);
     }
 
 
     private void intiRecyclerView() {
         mLayoutManager = new LinearLayoutManager(getContext());
-        mBinding.rvSearch.setLayoutManager(mLayoutManager);
         mGifAdapter = new GifAdapter();
+        mBinding.rvSearch.setLayoutManager(mLayoutManager);
         mBinding.rvSearch.setItemAnimator(new DefaultItemAnimator());
         mBinding.rvSearch.addItemDecoration(new CustomItemDecoration(getContext(), Color.BLACK, 3));
         mBinding.rvSearch.setHasFixedSize(true);
@@ -90,9 +96,9 @@ public class SearchFragment extends Fragment implements Observer {
     public void update(Observable observable, Object o) {
 
         if (observable instanceof SearchViewModel) {
-            GifAdapter gifAdapter = (GifAdapter) mBinding.rvSearch.getAdapter();
-            SearchViewModel model = (SearchViewModel) observable;
-            gifAdapter.setGifList(model.getSearchGifList());
+            mGifAdapter = (GifAdapter) mBinding.rvSearch.getAdapter();
+            mSearchViewModel = (SearchViewModel) observable;
+            mGifAdapter.setGifList(mSearchViewModel.getSearchGifList());
         }
 
     }
@@ -110,12 +116,13 @@ public class SearchFragment extends Fragment implements Observer {
             searchView.setSearchableInfo(
                     searchManager.getSearchableInfo(getActivity().getComponentName()));
             searchView.setQueryHint("Search...");
-
             searchView.setLayoutTransition(new LayoutTransition());
             searchView.animate().setDuration(300);
             mSearchViewModel.searchGifList(searchView);
 
-        }catch(Exception e){e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

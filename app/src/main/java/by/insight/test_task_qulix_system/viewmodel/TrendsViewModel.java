@@ -23,7 +23,7 @@ import retrofit2.Retrofit;
 public class TrendsViewModel extends BaseViewModel {
 
     public ObservableInt gifProgress;
-    public ObservableInt gifTrendsRecycler;
+    public ObservableInt gifRecycler;
 
     @Inject
     Retrofit mRetrofit;
@@ -34,7 +34,7 @@ public class TrendsViewModel extends BaseViewModel {
         super(context);
         this.gifList = new ArrayList<>();
         gifProgress = new ObservableInt(View.GONE);
-        gifTrendsRecycler = new ObservableInt(View.GONE);
+        gifRecycler = new ObservableInt(View.GONE);
         ((App) context.getApplicationContext()).getNetComponent().inject(this);
     }
 
@@ -52,7 +52,7 @@ public class TrendsViewModel extends BaseViewModel {
         setChanged();
         notifyObservers();
         gifProgress.set(View.GONE);
-        gifTrendsRecycler.set(View.VISIBLE);
+        gifRecycler.set(View.VISIBLE);
 
     }
 
@@ -65,7 +65,7 @@ public class TrendsViewModel extends BaseViewModel {
     }
 
     private void initializeViews() {
-        gifTrendsRecycler.set(View.GONE);
+        gifRecycler.set(View.GONE);
         gifProgress.set(View.VISIBLE);
     }
 

@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.inject.Inject;
+
+import by.insight.test_task_qulix_system.App;
 import by.insight.test_task_qulix_system.R;
 import by.insight.test_task_qulix_system.databinding.TabTrendBinding;
 import by.insight.test_task_qulix_system.tools.CustomItemDecoration;
@@ -22,20 +25,20 @@ import by.insight.test_task_qulix_system.view.adapter.GifAdapter;
 import by.insight.test_task_qulix_system.viewmodel.TrendsViewModel;
 
 
-public class TrendsFragment extends Fragment implements Observer{
+public class TrendsFragment extends Fragment implements Observer {
 
+    private TabTrendBinding mBinding;
 
     private LinearLayoutManager mLayoutManager;
     private GifAdapter mGifAdapter;
-    private TabTrendBinding mBinding;
-    private TrendsViewModel mTrendsViewModel;
+    @Inject
+    TrendsViewModel mTrendsViewModel;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
+        ((App) getActivity().getApplicationContext()).getViewModelComponent().inject(this);
     }
 
     @Nullable
@@ -59,7 +62,6 @@ public class TrendsFragment extends Fragment implements Observer{
     }
 
     private void initDataBinding() {
-        mTrendsViewModel = new TrendsViewModel(getContext());
         mBinding.setTrendsViewModel(mTrendsViewModel);
     }
 
@@ -67,17 +69,17 @@ public class TrendsFragment extends Fragment implements Observer{
     @Override
     public void update(Observable observable, Object o) {
         if (observable instanceof TrendsViewModel) {
-            GifAdapter gifAdapter = (GifAdapter) mBinding.rvTrends.getAdapter();
-            TrendsViewModel model = (TrendsViewModel) observable;
-            gifAdapter.setGifList(model.getGifList());
+            mGifAdapter = (GifAdapter) mBinding.rvTrends.getAdapter();
+            mTrendsViewModel = (TrendsViewModel) observable;
+            mGifAdapter.setGifList(mTrendsViewModel.getGifList());
         }
 
     }
 
     private void intiRecyclerView() {
         mLayoutManager = new LinearLayoutManager(getContext());
-        mBinding.rvTrends.setLayoutManager(mLayoutManager);
         mGifAdapter = new GifAdapter();
+        mBinding.rvTrends.setLayoutManager(mLayoutManager);
         mBinding.rvTrends.setItemAnimator(new DefaultItemAnimator());
         mBinding.rvTrends.addItemDecoration(new CustomItemDecoration(getContext(), Color.BLACK, 2));
         mBinding.rvTrends.setHasFixedSize(true);
@@ -103,7 +105,6 @@ public class TrendsFragment extends Fragment implements Observer{
     }
 
     private SwipeRefreshLayout.OnRefreshListener mRefreshListener = () -> refresh();
-
 
 }
 

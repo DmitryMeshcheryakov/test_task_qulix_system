@@ -16,5 +16,4 @@ public interface NetComponent {
 
     void inject(TrendsViewModel trendsViewModel);
     void inject(SearchViewModel searchViewModel);
-
 }
